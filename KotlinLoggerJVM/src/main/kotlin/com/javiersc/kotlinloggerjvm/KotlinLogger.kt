@@ -67,18 +67,24 @@ fun Any.jsonF(json: String) =
 inline fun <reified T : Any> Any.jsonF(serializable: T) =
     colorPrintSerializable(this::class.simpleName, jsonPrettyPrint(serializable), FATAL, RESET, RED)
 
-fun Any.logO(message: String) = colorPrint(this::class.simpleName, message, OFF, RESET, CYAN)
+fun Any.logO(message: String) = colorPrint(this::class.simpleName, message, OFF, RESET, PURPLE)
 
 fun Any.jsonO(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), OFF, RESET, CYAN)
+    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), OFF, RESET, PURPLE)
 
 inline fun <reified T : Any> Any.jsonO(serializable: T) =
-    colorPrintSerializable(this::class.simpleName, jsonPrettyPrint(serializable), OFF, RESET, CYAN)
+    colorPrintSerializable(
+        this::class.simpleName,
+        jsonPrettyPrint(serializable),
+        OFF,
+        RESET,
+        PURPLE
+    )
 
-fun Any.logT(message: String) = colorPrint(this::class.simpleName, message, TRACE, RESET, PURPLE)
+fun Any.logT(message: String) = colorPrint(this::class.simpleName, message, TRACE, RESET, CYAN)
 
 fun Any.jsonT(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), TRACE, RESET, PURPLE)
+    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), TRACE, RESET, CYAN)
 
 inline fun <reified T : Any> Any.jsonT(serializable: T) =
     colorPrintSerializable(
@@ -86,5 +92,5 @@ inline fun <reified T : Any> Any.jsonT(serializable: T) =
         jsonPrettyPrint(serializable),
         TRACE,
         RESET,
-        PURPLE
+        CYAN
     )

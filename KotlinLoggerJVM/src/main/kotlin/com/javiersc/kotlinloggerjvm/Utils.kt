@@ -14,13 +14,13 @@ fun colorPrint(
     foregroundColor: String
 ) {
     println(
-        """$backgroundColor$foregroundColor ┌$hashSymbol120
+        """$backgroundColor$foregroundColor ┌$hashSymbols
  │ $level | file ${stackTrace?.fileName}
- ├$hashSymbol120
+ ├$hashSymbols
  │ line ${stackTrace?.lineNumber} | class $className | fun ${stackTrace?.methodName}()
- ├$hashSymbol120
+ ├$hashSymbols
  │ $message
- └$hashSymbol120$RESET""".trimIndent()
+ └$hashSymbols$RESET""".trimIndent()
     )
 }
 
@@ -32,15 +32,15 @@ fun colorPrintJsonString(
     foregroundColor: String = RESET
 ) {
     println(
-        """$backgroundColor$foregroundColor ┌$hashSymbol120
+        """$backgroundColor$foregroundColor ┌$hashSymbols
  │ $level | file ${stackTrace?.fileName}
- ├$hashSymbol120
+ ├$hashSymbols
  │ line ${stackTrace?.lineNumber} | class $className | fun ${stackTrace?.methodName}()
- ├$hashSymbol120
+ ├$hashSymbols
 """.trimIndent()
     )
     jsonLines.forEach { println(it) }
-    println(" └$hashSymbol120$RESET")
+    println(" └$hashSymbols$RESET")
 }
 
 fun colorPrintSerializable(
@@ -51,15 +51,15 @@ fun colorPrintSerializable(
     foregroundColor: String = RESET
 ) {
     println(
-        """$backgroundColor$foregroundColor ┌$hashSymbol120
+        """$backgroundColor$foregroundColor ┌$hashSymbols
  │ $level | file ${stackTrace?.fileName}
- ├$hashSymbol120
+ ├$hashSymbols
  │ line ${stackTrace?.lineNumber} | class $className | fun ${stackTrace?.methodName}()
- ├$hashSymbol120
+ ├$hashSymbols
 """.trimIndent()
     )
     jsonLines.forEach { println(it) }
-    println(" └$hashSymbol120$RESET")
+    println(" └$hashSymbols$RESET")
 }
 
 @UseExperimental(ImplicitReflectionSerializer::class)
@@ -84,7 +84,7 @@ inline fun <reified T : Any> jsonPrettyPrint(serializable: T): List<String> {
     return jsonParsedLines
 }
 
-internal const val hashSymbol120 = "─────────────────────────────────────────────────────────────" +
+internal const val hashSymbols = "─────────────────────────────────────────────────────────────" +
         "────────────────────────────────────────────────────────────────────────────────────────" +
         "────────────────────────────────────────────────────────────────────────────────────────"
 

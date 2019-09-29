@@ -85,31 +85,31 @@ inline fun <reified T : Any> Any.jsonFF(serializable: T) =
     )
 
 fun Any.logOO(message: String) =
-    colorPrint(this::class.simpleName, message, OFF, BG_CYAN, BLACK)
+    colorPrint(this::class.simpleName, message, OFF, BG_PURPLE, BLACK)
 
 fun Any.jsonOO(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), OFF, BG_CYAN, BLACK)
+    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), OFF, BG_PURPLE, BLACK)
 
 inline fun <reified T : Any> Any.jsonOO(serializable: T) =
     colorPrintSerializable(
         this::class.simpleName,
         jsonPrettyPrint(serializable),
         OFF,
-        BG_CYAN,
+        BG_PURPLE,
         BLACK
     )
 
 fun Any.logTT(message: String) =
-    colorPrint(this::class.simpleName, message, TRACE, BG_PURPLE, BLACK)
+    colorPrint(this::class.simpleName, message, TRACE, BG_CYAN, BLACK)
 
 fun Any.jsonTT(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), TRACE, BG_PURPLE, BLACK)
+    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), TRACE, BG_CYAN, BLACK)
 
 inline fun <reified T : Any> Any.jsonTT(serializable: T) =
     colorPrintSerializable(
         this::class.simpleName,
         jsonPrettyPrint(serializable),
         TRACE,
-        BG_PURPLE,
+        BG_CYAN,
         BLACK
     )
