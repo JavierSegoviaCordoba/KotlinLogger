@@ -1,93 +1,59 @@
 package com.javiersc.kotlinloggerjvm
 
-import kotlinx.serialization.ImplicitReflectionSerializer
-import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.stringify
 
 
-fun colorPrint(
-    className: String?,
+@PublishedApi
+internal fun colorPrint(
     message: String,
     level: String,
-    backgroundColor: String,
-    foregroundColor: String
-) {
-    println(
-        """$backgroundColor$foregroundColor ┌$hashSymbols
- │ $level | file ${stackTrace?.fileName}
- ├$hashSymbols
- │ line ${stackTrace?.lineNumber} | class $className | fun ${stackTrace?.methodName}()
- ├$hashSymbols
- │ $message
- └$hashSymbols$RESET""".trimIndent()
-    )
-}
+    backgroundColor: String = RESET,
+    foregroundColor: String = RESET
+) = templatePrint(level, backgroundColor, foregroundColor) { println("│ $message") }
 
-fun colorPrintJsonString(
-    className: String?,
-    jsonLines: List<String>,
+@PublishedApi
+internal inline fun <reified T : Any> colorPrintJson(
+    json: T,
     level: String,
     backgroundColor: String = RESET,
     foregroundColor: String = RESET
-) {
-    println(
-        """$backgroundColor$foregroundColor ┌$hashSymbols
- │ $level | file ${stackTrace?.fileName}
- ├$hashSymbols
- │ line ${stackTrace?.lineNumber} | class $className | fun ${stackTrace?.methodName}()
- ├$hashSymbols
-""".trimIndent()
-    )
-    jsonLines.forEach { println(it) }
-    println(" └$hashSymbols$RESET")
-}
+) = templatePrint(level, backgroundColor, foregroundColor) { jsonPrettyPrint(json) }
 
-fun colorPrintSerializable(
-    className: String?,
-    jsonLines: List<String>,
+@PublishedApi
+internal inline fun templatePrint(
     level: String,
     backgroundColor: String = RESET,
-    foregroundColor: String = RESET
+    foregroundColor: String = RESET,
+    printer: () -> Unit
 ) {
+    print("$backgroundColor$foregroundColor")
     println(
-        """$backgroundColor$foregroundColor ┌$hashSymbols
- │ $level | file ${stackTrace?.fileName}
- ├$hashSymbols
- │ line ${stackTrace?.lineNumber} | class $className | fun ${stackTrace?.methodName}()
- ├$hashSymbols
-""".trimIndent()
+        """ 
+            ┌$hashSymbols
+            │ $level.$fileLink │ $fileN │ $classN │ $methodN │ $lineN
+            ├$hashSymbols
+        """.trimIndent()
     )
-    jsonLines.forEach { println(it) }
-    println(" └$hashSymbols$RESET")
+    printer.invoke()
+    println("└$hashSymbols$RESET")
 }
 
-@UseExperimental(ImplicitReflectionSerializer::class)
-@UnstableDefault
-fun jsonPrettyPrint(json: String): List<String> {
-    val jsonParsed: String = Json.indented.stringify(Json.indented.parseJson(json))
-    val jsonParsedLines: MutableList<String> = jsonParsed.lines().toMutableList()
-    jsonParsedLines.forEachIndexed { index: Int, line: String ->
-        jsonParsedLines[index] = " │ $line"
-    }
-    return jsonParsedLines
+@PublishedApi
+internal inline fun <reified T : Any> jsonPrettyPrint(json: T) {
+    val jsonParsed: String =
+        if (json !is String) Json.indented.stringify(json)
+        else Json.indented.stringify(Json.indented.parseJson(json))
+    jsonParsed.lines().forEach { line: String -> println("│ $line") }
 }
 
-@UseExperimental(ImplicitReflectionSerializer::class)
-@UnstableDefault
-inline fun <reified T : Any> jsonPrettyPrint(serializable: T): List<String> {
-    val jsonParsed: String = Json.indented.stringify(serializable)
-    val jsonParsedLines: MutableList<String> = jsonParsed.lines().toMutableList()
-    jsonParsedLines.forEachIndexed { index: Int, line: String ->
-        jsonParsedLines[index] = " │ $line"
-    }
-    return jsonParsedLines
-}
-
-internal const val hashSymbols = "─────────────────────────────────────────────────────────────" +
+@PublishedApi
+internal const val hashSymbols = "───────────────────────────────────────────────────────────────" +
         "────────────────────────────────────────────────────────────────────────────────────────" +
-        "────────────────────────────────────────────────────────────────────────────────────────"
+        "────────────────────────────────────────────────────────────────────────────────────────" +
+        "───────────────────────────────────────────────────────────────────────────────────────."
 
+@PublishedApi
 internal val stackTrace: StackTraceElement?
     get() = with(Throwable().stackTrace) {
         return this.firstOrNull { stackTraceElement ->
@@ -96,3 +62,19 @@ internal val stackTrace: StackTraceElement?
                     (stackTraceElement.fileName != "KotlinLogger.kt")
         }
     }
+
+@PublishedApi
+internal val fileN
+    get() = "file ${stackTrace?.fileName ?: "Unknown"}"
+@PublishedApi
+internal val classN
+    get() = "class ${stackTrace?.className ?: "Unknown"}"
+@PublishedApi
+internal val methodN
+    get() = "fun ${stackTrace?.methodName ?: "Unknown"}()"
+@PublishedApi
+internal val lineN
+    get() = "line ${stackTrace?.lineNumber ?: "Unknown"}"
+@PublishedApi
+internal val fileLink
+    get() = "(${stackTrace?.fileName}:${stackTrace?.lineNumber})"

@@ -33,6 +33,15 @@ val sourcesJar: Jar by tasks.creating(Jar::class) {
     from(sourceSets.main.get().allSource)
 }
 
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions.freeCompilerArgs = listOf(
+        "-Xuse-experimental=kotlin.Experimental",
+        "-Xuse-experimental=kotlinx.serialization.UnstableDefault",
+        "-Xuse-experimental=kotlinx.serialization.ImplicitSerialization",
+        "-Xuse-experimental=kotlinx.serialization.ImplicitReflectionSerializer"
+    )
+}
+
 val localProperties = getLocalProperties()
 
 bintray {

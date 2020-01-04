@@ -1,96 +1,49 @@
 package com.javiersc.kotlinloggerjvm
 
-fun Any.logA(message: String) = colorPrint(this::class.simpleName, message, ALL, RESET, RESET)
+fun logA(message: String) = colorPrint(message, ALL, RESET, RESET)
 
-fun Any.jsonA(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), ALL, RESET, RESET)
+fun jsonA(json: String) = colorPrintJson(json, ALL, RESET, RESET)
 
-inline fun <reified T : Any> Any.jsonA(serializable: T) =
-    colorPrintSerializable(this::class.simpleName, jsonPrettyPrint(serializable), ALL, RESET, RESET)
+inline fun <reified T : Any> jsonA(json: T) = colorPrintJson(json, ALL, RESET, RESET)
 
-fun Any.logD(message: String) = colorPrint(this::class.simpleName, message, DEBUG, RESET, GREEN)
+fun logD(message: String) = colorPrint(message, DEBUG, RESET, GREEN)
 
-fun Any.jsonD(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), DEBUG, RESET, GREEN)
+fun jsonD(json: String) = colorPrintJson(json, DEBUG, RESET, GREEN)
 
-inline fun <reified T : Any> Any.jsonD(serializable: T) =
-    colorPrintSerializable(
-        this::class.simpleName,
-        jsonPrettyPrint(serializable),
-        DEBUG,
-        RESET,
-        GREEN
-    )
+inline fun <reified T : Any> jsonD(json: T) = colorPrintJson(json, DEBUG, RESET, GREEN)
 
-fun Any.logI(message: String) = colorPrint(this::class.simpleName, message, INFO, RESET, BLUE)
+fun logI(message: String) = colorPrint(message, INFO, RESET, BLUE)
 
-fun Any.jsonI(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), INFO, RESET, BLUE)
+fun jsonI(json: String) = colorPrintJson(json, INFO, RESET, BLUE)
 
-inline fun <reified T : Any> Any.jsonI(serializable: T) =
-    colorPrintSerializable(this::class.simpleName, jsonPrettyPrint(serializable), INFO, RESET, BLUE)
+inline fun <reified T : Any> jsonI(json: T) = colorPrintJson(json, INFO, RESET, BLUE)
 
-fun Any.logW(message: String) = colorPrint(this::class.simpleName, message, WARNING, RESET, YELLOW)
+fun logW(message: String) = colorPrint(message, WARNING, RESET, YELLOW)
 
-fun Any.jsonW(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), WARNING, RESET, YELLOW)
+fun jsonW(json: String) = colorPrintJson(json, WARNING, RESET, YELLOW)
 
-inline fun <reified T : Any> Any.jsonW(serializable: T) =
-    colorPrintSerializable(
-        this::class.simpleName,
-        jsonPrettyPrint(serializable),
-        WARNING,
-        RESET,
-        YELLOW
-    )
+inline fun <reified T : Any> jsonW(json: T) = colorPrintJson(json, WARNING, RESET, YELLOW)
 
-fun Any.logE(message: String) =
-    colorPrint(this::class.simpleName, message, ERROR, RESET, BRIGHT_RED)
+fun logE(message: String) = colorPrint(message, ERROR, RESET, BRIGHT_RED)
 
-fun Any.jsonE(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), ERROR, RESET, BRIGHT_RED)
+fun jsonE(json: String) = colorPrintJson(json, ERROR, RESET, BRIGHT_RED)
 
-inline fun <reified T : Any> Any.jsonE(serializable: T) =
-    colorPrintSerializable(
-        this::class.simpleName,
-        jsonPrettyPrint(serializable),
-        ERROR,
-        RESET,
-        BRIGHT_RED
-    )
+inline fun <reified T : Any> jsonE(json: T) = colorPrintJson(json, ERROR, RESET, BRIGHT_RED)
 
-fun Any.logF(message: String) = colorPrint(this::class.simpleName, message, FATAL, RESET, RED)
+fun logF(message: String) = colorPrint(message, FATAL, RESET, RED)
 
-fun Any.jsonF(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), FATAL, RESET, RED)
+fun jsonF(json: String) = colorPrintJson(json, FATAL, RESET, RED)
 
-inline fun <reified T : Any> Any.jsonF(serializable: T) =
-    colorPrintSerializable(this::class.simpleName, jsonPrettyPrint(serializable), FATAL, RESET, RED)
+inline fun <reified T : Any> jsonF(json: T) = colorPrintJson(json, FATAL, RESET, RED)
 
-fun Any.logO(message: String) = colorPrint(this::class.simpleName, message, OFF, RESET, PURPLE)
+fun logO(message: String) = colorPrint(message, OFF, RESET, PURPLE)
 
-fun Any.jsonO(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), OFF, RESET, PURPLE)
+fun jsonO(json: String) = colorPrintJson(json, OFF, RESET, PURPLE)
 
-inline fun <reified T : Any> Any.jsonO(serializable: T) =
-    colorPrintSerializable(
-        this::class.simpleName,
-        jsonPrettyPrint(serializable),
-        OFF,
-        RESET,
-        PURPLE
-    )
+inline fun <reified T : Any> jsonO(json: T) = colorPrintJson(json, OFF, RESET, PURPLE)
 
-fun Any.logT(message: String) = colorPrint(this::class.simpleName, message, TRACE, RESET, CYAN)
+fun logT(message: String) = colorPrint(message, TRACE, RESET, CYAN)
 
-fun Any.jsonT(json: String) =
-    colorPrintJsonString(this::class.simpleName, jsonPrettyPrint(json), TRACE, RESET, CYAN)
+fun jsonT(json: String) = colorPrintJson(json, TRACE, RESET, CYAN)
 
-inline fun <reified T : Any> Any.jsonT(serializable: T) =
-    colorPrintSerializable(
-        this::class.simpleName,
-        jsonPrettyPrint(serializable),
-        TRACE,
-        RESET,
-        CYAN
-    )
+inline fun <reified T : Any> jsonT(json: T) = colorPrintJson(json, TRACE, RESET, CYAN)

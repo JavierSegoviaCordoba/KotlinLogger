@@ -2,22 +2,24 @@
 
 ###### Pretty print logs based on Log4j levels
 ## Features
-- File, class and method names, and line number
-- JSON pretty-printing support 
+- File, class, function and line
+- Clickable file:line to open directly it
+- JSON pretty-printing support
+- Based on Kotlin serialization
 
 Note: You can configure the ANSI colors in the IntelliJ IDEA settings (search `ANSI` to find it)
 
-#### Download
+## Download
 - Groovy:
 ```groovy
-implementation 'com.javiersc.kotlinlogger:jvm:0.0.2'
+implementation 'com.javiersc.kotlinlogger:jvm:0.0.3'
 ```
 - Kotlin DSL
 ```kotlin
-implementation("com.javiersc.kotlinlogger:jvm:0.0.2")
+implementation("com.javiersc.kotlinlogger:jvm:0.0.3")
 ```
 
-#### Usage
+## String usage
 ```kotlin
 logA("Your message")
 logD("Your message")
@@ -35,10 +37,10 @@ logD("Your message")
 | Off       | ![Normal 7](screenshots/normal7.png) |
 | Trace     | ![Normal 8](screenshots/normal8.png) |
 
-## JSON
+## JSON usage
 You have all levels for JSON printing too
 
-#### Usage
+### String
 ```kotlin
 // json strings
 val userString =
@@ -54,6 +56,12 @@ val userString =
         """
 jsonA(userString)
 
+//Line breaks, spaces and similar are not necessary
+val userString = """{"name":"George", "age":20, "hasCar":false}"""
+jsonA(userString)
+```
+### Serializable
+```kotlin
 // data class with Kotlin Serialization
 @Serializable
 data class User(val name: String, val age: Int, val hobbies: List<String>)
