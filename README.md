@@ -3,7 +3,7 @@
 ###### Pretty print logs based on Log4j levels
 ## Features
 - File, class, function and line
-- Clickable file:line to open directly it
+- Clickable text (file:number) to open the file with the line focused
 - JSON pretty-printing support
 - Based on Kotlin serialization
 
@@ -12,12 +12,15 @@ Note: You can configure the ANSI colors in the IntelliJ IDEA settings (search `A
 ## Download
 - Groovy:
 ```groovy
-implementation 'com.javiersc.kotlinlogger:jvm:0.0.3'
+implementation 'com.javiersc.kotlinlogger:jvm:0.0.4'
+implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.14.0'
 ```
 - Kotlin DSL
 ```kotlin
-implementation("com.javiersc.kotlinlogger:jvm:0.0.3")
+implementation("com.javiersc.kotlinlogger:jvm:0.0.4")
+implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.14.0")
 ```
+Serialization runtime dependency is necessary for the JSON pretty-printing support
 
 ## String usage
 ```kotlin

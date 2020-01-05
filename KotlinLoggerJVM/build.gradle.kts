@@ -17,9 +17,9 @@ repositories {
 
 dependencies {
     Dependencies.Kotlin.apply {
-        implementation(stdlib)
-        implementation(reflect)
-        implementation(serializationRuntime)
+        api(stdlib)
+        api(reflect)
+        api(serializationRuntime)
     }
 }
 
