@@ -1,6 +1,7 @@
 package com.javiersc.kotlinloggerjvm
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonBuilder
 import kotlinx.serialization.stringify
 
 
@@ -41,9 +42,13 @@ internal inline fun templatePrint(
 
 @PublishedApi
 internal inline fun <reified T : Any> jsonPrettyPrint(json: T) {
+    val jsonConfig = JsonBuilder().apply {
+        prettyPrint = true
+        useArrayPolymorphism = true
+    }.buildConfiguration()
     val jsonParsed: String =
-        if (json !is String) Json.indented.stringify(json)
-        else Json.indented.stringify(Json.indented.parseJson(json))
+        if (json !is String) Json(jsonConfig).stringify(json)
+        else Json(jsonConfig).stringify(Json(jsonConfig).parseJson(json))
     jsonParsed.lines().forEach { line: String -> println("│ $line") }
 }
 
@@ -66,15 +71,19 @@ internal val stackTrace: StackTraceElement?
 @PublishedApi
 internal val fileN
     get() = "file ${stackTrace?.fileName ?: "Unknown"}"
+
 @PublishedApi
 internal val classN
     get() = "class ${stackTrace?.className ?: "Unknown"}"
+
 @PublishedApi
 internal val methodN
     get() = "fun ${stackTrace?.methodName ?: "Unknown"}()"
+
 @PublishedApi
 internal val lineN
     get() = "line ${stackTrace?.lineNumber ?: "Unknown"}"
+
 @PublishedApi
 internal val fileLink
     get() = "(${stackTrace?.fileName}:${stackTrace?.lineNumber})"
