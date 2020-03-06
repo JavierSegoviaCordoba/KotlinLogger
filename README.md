@@ -12,13 +12,13 @@ Note: You can configure the ANSI colors in the IntelliJ IDEA settings (search `A
 ## Download
 - Groovy:
 ```groovy
-implementation 'com.javiersc.kotlinlogger:jvm:0.0.4'
-implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.14.0'
+implementation 'com.javiersc.kotlinlogger:jvm:0.0.5'
+implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0'
 ```
 - Kotlin DSL
 ```kotlin
-implementation("com.javiersc.kotlinlogger:jvm:0.0.4")
-implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.14.0")
+implementation("com.javiersc.kotlinlogger:jvm:0.0.")
+implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
 ```
 Serialization runtime dependency is necessary for the JSON pretty-printing support
 
