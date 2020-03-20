@@ -1,7 +1,9 @@
+package sample.deep.pack
+
 import com.javiersc.kotlinloggerjvm.*
 import kotlinx.serialization.Serializable
 
-object SomeObject {
+internal object SomeObject {
 
     object SomeNestedObject {
         fun loggingNested() {
@@ -66,7 +68,8 @@ object SomeObject {
     @Serializable
     data class User(val name: String, val age: Int, val hobbies: List<String>)
 
-    private val user = User("John", 19, listOf("Tennis", "Coding"))
+    private val user =
+        User("John", 19, listOf("Tennis", "Coding"))
     private const val userString =
         """
            {

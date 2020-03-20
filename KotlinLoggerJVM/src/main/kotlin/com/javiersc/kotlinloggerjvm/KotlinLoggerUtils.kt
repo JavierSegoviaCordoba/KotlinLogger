@@ -62,7 +62,7 @@ internal const val hashSymbols = "───────────────�
 internal val stackTrace: StackTraceElement?
     get() = with(Throwable().stackTrace) {
         return this.firstOrNull { stackTraceElement ->
-            (stackTraceElement.fileName != "Utils.kt") and
+            (stackTraceElement.fileName != "KotlinLoggerUtils.kt") and
                     (stackTraceElement.fileName != "KotlinLoggerBackground.kt") and
                     (stackTraceElement.fileName != "KotlinLogger.kt")
         }
